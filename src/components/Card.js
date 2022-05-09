@@ -1,11 +1,29 @@
 import React from "react";
 
-function Card(props) {
+function Card({
+  item,
+  cardValues,
+  setCardValues,
+  index,
+  cartValue,
+  setCartValue,
+}) {
+  const handleSubmit = (e) => {
+    let itemCopy = { ...item };
+    itemCopy.isSelected = !item.isSelected;
+    let cardValuesCopy = [...cardValues];
+    cardValuesCopy[index] = itemCopy;
+    setCardValues(cardValuesCopy);
+    if (item.isSelected) {
+      setCartValue(cartValue - 1);
+    } else {
+      setCartValue(cartValue + 1);
+    }
+  };
+
   return (
     <>
-      <div className="card text-center"
-      //  style={{ width: "18rem" }}
-       >
+      <div className="card text-center">
         <div>
           <img
             style={{ height: "190px" }}
@@ -14,15 +32,30 @@ function Card(props) {
             alt="Shopping Item"
           />
           <div className="card-body">
-            <h5 className="card-title"> <strong>{props.title}</strong></h5>
-            <p className="card-text">{props.price}</p>
+            <h5 className="card-title">
+              {" "}
+              <strong>{item.title}</strong>
+            </h5>
+            <p className="card-text">{item.price}</p>
 
             <div className="container d-flex justify-content-center ">
-              {/* <div> */}
-                <button type="button" className="btn btn-outline-dark">
+              {!item.isSelected ? (
+                <button
+                  type="button"
+                  className="btn btn-outline-dark"
+                  onClick={handleSubmit}
+                >
                   Add to Cart
                 </button>
-              {/* </div> */}
+              ) : (
+                <button
+                  type="button"
+                  className="btn btn-outline-dark"
+                  onClick={handleSubmit}
+                >
+                  Remove frorm Cart
+                </button>
+              )}
             </div>
           </div>
         </div>

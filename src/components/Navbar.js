@@ -1,6 +1,7 @@
 import * as React from "react";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-export default function Navbar() {
+export default function Navbar(props) {
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -65,16 +66,13 @@ export default function Navbar() {
                 </ul>
               </li>
               <div className="d-flex flex-reverse">
-                {/* <div> */}
                 <button className="btn btn-outline-dark" type="submit">
-                  {/* {<ShoppingCartIcon />} */}
+                  {<ShoppingCartIcon />}
                   Cart
                   <span className="badge bg-dark text-white ms-1 rounded-pill">
-                    0
+                    {props.cartValue}
                   </span>
                 </button>
-
-                {/* </div> */}
               </div>
             </ul>
           </div>

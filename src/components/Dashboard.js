@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "./Card";
 
-function Dashboard() {
+function Dashboard({cartValue, setCartValue}) {
+  const [cardValues, setCardValues] = useState([
+    { cardId: 1, title: "Fancy Product", price: "$40.00 - $80.00" , isSelected: false },
+    { cardId: 2, title: "Special Item", price: "$18.00" , isSelected: false },
+    { cardId: 3, title: "Sale Item", price: "$25.00" , isSelected: false },
+    { cardId: 4, title: "Popular Item", price: "$40.00" , isSelected: false },
+    { cardId: 5, title: "Fancy Product", price: "$120.00 - $280.00" , isSelected: false },
+    { cardId: 6, title: "Special Item", price: "18.00" , isSelected: false },
+    { cardId: 7, title: "Popular Item", price: "$40.00" , isSelected: false },
+    { cardId: 8, title: "Special Item", price: "18.00" , isSelected: false },
+  ]);
+
   return (
     <>
       <div
@@ -16,30 +27,19 @@ function Dashboard() {
         </p>
       </div>
       <div className="container row mx-auto mt-5 pb-5">
-        <div className="col-3 pt-5">
-          <Card title="Fancy Product" price="$40.00 - $80.00" />
-        </div>
-        <div className="col-3 pt-5">
-          <Card title="Special Item" price="$18.00" />
-        </div>
-        <div className="col-3 pt-5">
-          <Card title="Sale Item" price="$25.00" />
-        </div>
-        <div className="col-3 pt-5">
-          <Card title="Popular Item" price="$40.00" />
-        </div>
-        <div className="col-3 pt-5">
-          <Card title="Sale Item" price="$25.00" />
-        </div>
-        <div className="col-3 pt-5">
-          <Card title="Fancy Product" price="$120.00 - $280.00" />
-        </div>
-        <div className="col-3 pt-5">
-          <Card title="Special Item" price="18.00" />
-        </div>
-        <div className="col-3 pt-5">
-          <Card title="Popular Item" price="$40.00" />
-        </div>
+        {cardValues.map((item, index) => (
+          <div className="col-3 pt-5" key={item.cardId}>
+            <Card
+              cardValues = {cardValues}
+              setCardValues={setCardValues}
+              isSelected={item.isSelected}
+              item={item}
+              index={index}
+              cartValue={cartValue}
+              setCartValue={setCartValue}
+            />
+          </div>
+        ))}
       </div>
     </>
   );
